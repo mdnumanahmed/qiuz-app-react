@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client'
 import './index.css'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from './components/Home'
-import Topics from './components/Quizes'
+import Quiz from './components/Quiz'
 import Statistics from './components/Statistics'
 import Blogs from './components/Blogs'
-import { loadTopicsAndQuiz } from './utils/loadTopicsAndQuiz'
+import { loadQuiz, loadTopicsAndQuiz } from './utils/loadTopicsAndQuiz'
 import MainLayout from './components/MainLayout'
+import Topics from './components/Topics'
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
       {
         path: 'topics',
         element: <Topics/>
+      },
+      {
+        path: 'topic/:topicId',
+        element: <Quiz />,
+        loader: ({params}) => loadQuiz(params.topicId)
       },
       {
         path: 'statistics',
